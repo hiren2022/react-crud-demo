@@ -1,0 +1,106 @@
+const User = require("../Models/User");
+const bcrypt = require("bcrypt");
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
+
+module.exports.GetAll = async (req, res) => {
+    try {
+        const users = await User.find()
+        if(users && users.length){
+            res.status(200).send({success: false,msg:"fetch successfully",data:users});
+        }
+        else {
+            res.status(404).send({success: false,msg:"users not found",data:users});
+        }
+    } catch (ex) {
+        res.send(ex)
+    }
+};
+
+module.exports.Create = async (req, res) => {
+    try {
+        console.log('req.body',req.body.profile)
+        const { name, email, gender,contact,hobby,profile,color } = req.body;
+        const user = await User.findOne({ email });
+        if (user){
+            return res.json({ msg: "User already exists", status: false });
+        }else{
+            let user = new User({name,email,gender,contact,hobby,profile,color})
+            user.save(function (error, document) {
+                if (error){
+                    // console.error(error)
+                    res.status(400).send({success: false,msg:"creation failed",data:error});
+                }
+                else {
+                    res.status(201).send({success: true,msg:"successfully created",data:document});
+                }
+            });
+        }
+    } catch (ex) {
+
+    }
+};
+
+
+
+module.exports.getById = async (req, res) => {
+    try {
+        const user = await User.find({ _id:  req.params.id  })
+        if(user && user.length){
+            res.status(200).send({success: true,msg:"User Found",data:user});
+        }
+        else {
+            res.status(404).send({success: false,msg:"User Not Found",data:null});
+        }
+        //     .select([
+        //     "email",
+        //     "name",
+        //     "profile",
+        //     "_id",
+        //     "contact",
+        //     "gender",
+        //     "hobby"
+        // ]);
+    } catch (ex) {
+        res.send(ex);
+    }
+};
+
+module.exports.Update = async (req, res) => {
+    try {
+        const userId = req.body._id;
+        const userData = await User.findByIdAndUpdate(
+            userId,
+            req.body,
+            {new: true}
+        );
+        if(userData){
+            return res.status(201).send({success: true,msg:"User Updated Successfully",data:userData});
+        }
+        else {
+            return res.status(400).send({success: false,msg:"User Update Failed",data: null});
+        }
+    } catch (ex) {
+        res.send(ex);
+    }
+};
+
+module.exports.Delete = async (req, res) => {
+    try {
+        if (!req.params.id) {
+            return res.json({ msg: "User id is required " });
+        }
+        else {
+            let user = await User.deleteOne({_id:req.params.id})
+            if( user && user?.acknowledged){
+                return res.status(200).send({success: true,msg:"User Deleted Successfully",});
+            }
+            else{
+                return res.status(400).send({success: false,msg:"failed",});
+            }
+        }
+    } catch (ex) {
+        res.send(ex);
+    }
+};
