@@ -1,7 +1,4 @@
 const User = require("../Models/User");
-const bcrypt = require("bcrypt");
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
 
 
 module.exports.GetAll = async (req, res) => {
@@ -20,7 +17,6 @@ module.exports.GetAll = async (req, res) => {
 
 module.exports.Create = async (req, res) => {
     try {
-        console.log('req.body',req.body.profile)
         const { name, email, gender,contact,hobby,profile,color } = req.body;
         const user = await User.findOne({ email });
         if (user){
