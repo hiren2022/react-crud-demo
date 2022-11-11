@@ -1,5 +1,5 @@
 
-let url = 'react-crud-demo-rfuvfdie3-hiren2022.vercel.app/api'
+let url = 'https://react-crud-demo-rfuvfdie3-hiren2022.vercel.app/api'
 
 export const htpPost = async (type,data) => {
     return await fetch(`${url}${type}`,{
