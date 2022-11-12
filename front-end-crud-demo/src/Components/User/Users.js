@@ -53,7 +53,7 @@ const Users = () => {
                     <tbody>
                     {users && users.length && users.map((ele,index)=> (
                         <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700' key={index}>
-                            <td scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{index + 1}</td>
+                            <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{index + 1}</td>
                             <td className="py-4 px-6">{ele?.name}</td>
                             <td className="py-4 px-6">{ele?.email}</td>
                             <td className="py-4 px-6">{ele?.contact}</td>
