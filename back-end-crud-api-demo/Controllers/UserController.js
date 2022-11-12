@@ -17,7 +17,7 @@ module.exports.GetAll = async (req, res) => {
 
 module.exports.Create = async (req, res) => {
     try {
-        const { name, email, gender,contact,hobby,profile,color } = req.body;
+        const { name, email, gender,contact,hobby,profile,color,state } = req.body;
         const user = await User.findOne({ email });
         if (user){
             return res.json({ msg: "User already exists", status: false });
