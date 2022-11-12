@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {htpGet, htpPost} from "../../Helper/api";
-import {useNavigate} from "react-router-dom";
-import {useParams} from "react-router-dom";
+import {useRouter,} from "next/router";
+import Head from "next/head";
 
 
 
-const AddUser = () => {
+
+const AddUser = ({params}) => {
     const [user,setUser] = useState({
         name:'',
         email:'',
@@ -15,8 +16,7 @@ const AddUser = () => {
         color:'',
         state:''
     })
-    const params = useParams()
-    const navigate = useNavigate()
+    const router = useRouter()
     const getUserById = async (id) => {
         let resp = await htpGet(`/user/get/${id}`)
         if(resp && resp.success){
@@ -49,12 +49,15 @@ const AddUser = () => {
         let type = (params && params.id) ? '/user/update': '/user/create';
         let resp = await htpPost(type,user)
         if(resp.status === 201){
-           navigate('/')
+            router.push('/')
         }
     }
     let {name,email,contact,gender,hobby,color,state} = user;
     return (
         <>
+            <Head>
+                <title>{params && params.id ? "Edit User" : "Add User"}</title>
+            </Head>
             <div className='flex justify-evenly items-center rounded-[5px] flex-col p-8'>
                 <div className="w-full max-w-lg">
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -64,7 +67,7 @@ const AddUser = () => {
                                 Name
                             </label>
                             <input className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                   id="grid-first-name" type="text" name='name' value={name} onChange={(e)=> handleChange(e)} placeholder="Name"/>
+                                id="grid-first-name" type="text" name='name' value={name} onChange={(e)=> handleChange(e)} placeholder="Name"/>
                             {/*<p className="text-red-500 text-xs italic">Please fill out this field.</p>*/}
                         </div>
                         {/*<div className="w-full md:w-1/2 px-3">*/}
@@ -111,8 +114,8 @@ const AddUser = () => {
                             </label>
                             <div className="relative">
                                 <select name='state' value={state} onChange={(e)=> handleChange(e)}
-                                        className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        id="grid-state">
+                                    className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    id="grid-state">
                                     <option value='Gujarat'>Gujarat</option>
                                     <option value='Maharashtra'>Maharashtra</option>
                                     <option value='Rajasthan'>Rajasthan</option>
@@ -203,7 +206,7 @@ const AddUser = () => {
                     <div onClick={(e)=> {handleCreate(e)}} className='w-[100%] text-center pt-[0.5rem] pr-[1rem] pb-[0.5rem] pl-[1rem] mb-2 border-none bg-[#ffac41] rounded-[5px] text-[black] cursor-pointer'>
                         <button>Create</button>
                     </div>
-                    <div onClick={(e)=> {navigate('/')}} className='w-[100%] text-center pt-[0.5rem] pr-[1rem] pb-[0.5rem] pl-[1rem] mb-2 border border-[red] rounded-[5px] text-[black] cursor-pointer'>
+                    <div onClick={(e)=> {router.push('/')}} className='w-[100%] text-center pt-[0.5rem] pr-[1rem] pb-[0.5rem] pl-[1rem] mb-2 border border-[red] rounded-[5px] text-[black] cursor-pointer'>
                         <button>Cancel</button>
                     </div>
                 </div>

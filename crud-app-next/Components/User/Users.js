@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {useRouter} from "next/router";
 import {htpDelete, htpGet} from "../../Helper/api";
+import Head from "next/head";
 
 
 
 const Users = () => {
-    let navigate = useNavigate()
+    let router = useRouter()
     const [users,setUsers] = useState(null)
     const getAllUsers = async ()=>{
         let resp = await htpGet('/user/all')
@@ -27,11 +28,15 @@ const Users = () => {
         }
     }
     const handleOnEdit = async (id) => {
-        navigate(`/edit-user/${id}`)
+        router.push(`/edit-user/${id}`)
     }
     return (
+        <>
+        <Head>
+            <title>Users</title>
+        </Head>
         <div className='flex justify-evenly items-center rounded-[5px] flex-col p-8'>
-            <div onClick={(e)=> {navigate('/add-user')}} className='w-[50%] text-center pt-[0.5rem] pr-[1rem] pb-[0.5rem] pl-[1rem] mb-2 border-none bg-[#ffac41] rounded-[5px] text-[black] cursor-pointer'>
+            <div onClick={(e)=> {router.push('/add-user')}} className='w-[50%] text-center pt-[0.5rem] pr-[1rem] pb-[0.5rem] pl-[1rem] mb-2 border-none bg-[#ffac41] rounded-[5px] text-[black] cursor-pointer'>
                 <button>Add User</button>
             </div>
             <div className='overflow-x-auto relative"'>
@@ -70,6 +75,7 @@ const Users = () => {
                 </table>
             </div>
         </div>
+        </>
     )
 }
 

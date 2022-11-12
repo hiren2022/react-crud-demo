@@ -22,7 +22,7 @@ module.exports.Create = async (req, res) => {
         if (user){
             return res.json({ msg: "User already exists", status: false });
         }else{
-            let user = new User({name,email,gender,contact,hobby,profile,color})
+            let user = new User({name,email,gender,contact,hobby,profile,color,state})
             user.save(function (error, document) {
                 if (error){
                     // console.error(error)
