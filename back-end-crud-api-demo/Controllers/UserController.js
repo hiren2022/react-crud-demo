@@ -17,12 +17,12 @@ module.exports.GetAll = async (req, res) => {
 
 module.exports.Create = async (req, res) => {
     try {
-        const { name, email, gender,contact,hobby,profile,color,state } = req.body;
+        const { email} = req.body;
         const user = await User.findOne({ email });
         if (user){
             return res.json({ msg: "User already exists", status: false });
         }else{
-            let user = new User({name,email,gender,contact,hobby,profile,color,state})
+            let user = new User(req.body)
             user.save(function (error, document) {
                 if (error){
                     // console.error(error)

@@ -1,5 +1,6 @@
 
 let url = 'https://react-crud-demo-rfuvfdie3-hiren2022.vercel.app/api'
+// let url = 'http://localhost:4040/api'
 
 export const htpPost = async (type,data) => {
     return await fetch(`${url}${type}`,{

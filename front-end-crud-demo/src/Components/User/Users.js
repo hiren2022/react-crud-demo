@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 import {htpDelete, htpGet} from "../../Helper/api";
 
 
@@ -60,7 +61,7 @@ const Users = () => {
                             <td className="py-4 px-6">{ele?.gender}</td>
                             <td className="py-4 px-6">{ele?.hobby.join(',')}</td>
                             <td className="py-4 px-6">{ele?.state}</td>
-                            <td className="py-4 px-6">{ele?.color}</td>
+                            <td className="py-4 px-6"><FaHeart fill={ele?.color} stroke={ele?.color}/></td>
                             <td className="py-4 px-6"><button className='w-[50px] h-[30px] border-none bg-[green] rounded-[5px] text-[white] cursor-pointer' onClick={()=> handleOnEdit(ele?._id)}>Edit</button></td>
                             <td className="py-4 px-6"><button className='w-[50px] h-[30px] border-none bg-[red] rounded-[5px] text-[white] cursor-pointer' onClick={()=> handleOnDelete(ele?._id)}>Delete</button></td>
                         </tr>

@@ -3,8 +3,6 @@ import {htpGet, htpPost} from "../../Helper/api";
 import {useNavigate} from "react-router-dom";
 import {useParams} from "react-router-dom";
 
-
-
 const AddUser = () => {
     const [user,setUser] = useState({
         name:'',
@@ -113,6 +111,7 @@ const AddUser = () => {
                                 <select name='state' value={state} onChange={(e)=> handleChange(e)}
                                         className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         id="grid-state">
+                                    <option value=''>Select State</option>
                                     <option value='Gujarat'>Gujarat</option>
                                     <option value='Maharashtra'>Maharashtra</option>
                                     <option value='Rajasthan'>Rajasthan</option>
@@ -148,7 +147,7 @@ const AddUser = () => {
                                    className="py-4 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
                         </div>
                         <div className="flex items-center pl-4 rounded border border-gray-200 dark:border-gray-700">
-                            <input id="bordered-radio-3" type="radio" value="Other"  name="gender" checked={gender === 'Female'} onChange={(e)=> handleChange(e)}
+                            <input id="bordered-radio-3" type="radio" value="Other"  name="gender" checked={gender === 'Other'} onChange={(e)=> handleChange(e)}
                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                             <label htmlFor="bordered-radio-3"
                                    className="py-4 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">Other</label>
@@ -194,8 +193,8 @@ const AddUser = () => {
                                 Favorite Color
                             </label>
                             <input
-                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-password" type="color" placeholder="color" onChange={(e)=> handleChange(e)} name='color' value={color}/>
+                                className="appearance-none block w-full h-[40px] border border-gray-200 rounded  px-1 py-1 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-color" type="color" placeholder="color" onChange={(e)=> handleChange(e)} name='color' value={color}/>
                             {/*<p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd*/}
                             {/*    like</p>*/}
                         </div>
