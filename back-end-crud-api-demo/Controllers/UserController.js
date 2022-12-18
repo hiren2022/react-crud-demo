@@ -1,9 +1,14 @@
+const {ObjectId} = require('mongodb');
 const User = require("../Models/User");
-
+const jwt = require('jsonwebtoken');
+const {to_Encrypt, to_Decrypt} = require("../Utils/encryptDecrypt");
+require("dotenv").config();
+const secret_key = process.env.SECRET_KEY;
 
 module.exports.GetAll = async (req, res) => {
     try {
-        const users = await User.find()
+        let {user_id} = req.user;
+        const users = await User.find({_id:{$nin: user_id}})
         if(users && users.length){
             res.status(200).send({success: false,msg:"fetch successfully",data:users});
         }
@@ -15,21 +20,54 @@ module.exports.GetAll = async (req, res) => {
     }
 };
 
-module.exports.Create = async (req, res) => {
+module.exports.Login = async (req, res) => {
     try {
-        const { email} = req.body;
+        const {email, password} = req.body;
+        const p_user = await User.findOne({email: email});
+        if (p_user) {
+            if (to_Decrypt(p_user.password) === password) {
+                const token = jwt.sign(
+                    { user_id: p_user._id, ...p_user},
+                    secret_key,
+                    {
+                        expiresIn: "2h",
+                    }
+                );
+                await User.findOneAndUpdate({_id:p_user._id}, {status: true});
+                res.status(200).send({success: true,token:token});
+            } else {
+                res.status(404).send({error: "password can't match"});
+            }
+        } else {
+            res.status(404).send({error: "user not found"});
+        }
+    } catch (ex) {
+
+    }
+};
+module.exports.LogOut = async (req, res) => {
+    try {
+        let { user_id} = req.user;
+        await User.findOneAndUpdate({_id:user_id}, {status: false});
+        return res.status(200).send({msg:'Logout Successfully',success: true})
+    } catch (ex) {
+
+    }
+};
+module.exports.Register = async (req, res) => {
+    try {
+        const { email,password} = req.body;
         const user = await User.findOne({ email });
         if (user){
             return res.json({ msg: "User already exists", status: false });
         }else{
-            let user = new User(req.body)
+            let user = new User({...req.body,password:to_Encrypt(password)})
             user.save(function (error, document) {
                 if (error){
-                    // console.error(error)
-                    res.status(400).send({success: false,msg:"creation failed",data:error});
+                    res.status(400).send({success: false,msg:"Registration failed",data:error});
                 }
                 else {
-                    res.status(201).send({success: true,msg:"successfully created",data:document});
+                    res.status(201).send({success: true,msg:"Successfully Registered",data:document});
                 }
             });
         }

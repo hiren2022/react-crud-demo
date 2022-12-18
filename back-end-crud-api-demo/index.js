@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const UserRoutes = require("./Routes/UserRoutes");
+const RequestRouts = require("./Routes/RequestRouts");
 // var multer = require('multer');
 // var upload = multer();
 const app = express();
@@ -30,4 +31,5 @@ app.listen(port, () => {
 })
 
 app.use("/api/user", UserRoutes);
+app.use("/api/request", RequestRouts);
 

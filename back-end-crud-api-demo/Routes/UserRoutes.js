@@ -1,9 +1,12 @@
-const { GetAll,getById,Create,Update,Delete  } = require("../Controllers/UserController");
+const { GetAll,getById,Register,Login,Update,Delete,LogOut  } = require("../Controllers/UserController");
 const router = require("express").Router();
+const auth = require("../Middleware/Auth");
 
-router.post("/create", Create);
-router.get("/get/:id", getById);
-router.get("/all", GetAll);
+router.post("/register", Register);
+router.post("/login", Login);
+router.get("/get/:id",auth, getById);
+router.post("/logout",auth, LogOut);
+router.get("/userAll",auth, GetAll);
 router.post("/update", Update);
 router.delete("/delete/:id", Delete);
 
