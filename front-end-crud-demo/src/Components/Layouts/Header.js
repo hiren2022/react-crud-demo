@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../Actions/userActions";
 import {useNavigate} from "react-router-dom";
+import {getRequests} from "../../Actions/requestActions";
 
 
 
 const Header = ({checkIsAuthRoute}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const requests = useSelector(state => state.requestData.userRequests);
     const pathName = window.location.pathname;
     const navBars = [
         {name:'Dashboard',path:'/'},
@@ -17,7 +19,9 @@ const Header = ({checkIsAuthRoute}) => {
     ]
     const [active,setActive] = useState('Dashboard');
     const [open,setOpen] = useState(false);
-
+    useEffect(()=>{
+        dispatch(getRequests({type:'user'}))
+    },[]);
     useEffect(()=> {
         if(pathName !== '/'){
             let path = pathName.slice(1).charAt(0).toUpperCase() + pathName.slice(2);
@@ -26,10 +30,10 @@ const Header = ({checkIsAuthRoute}) => {
         else {
             setActive('Dashboard');
         }
-    },[pathName])
+    },[pathName,requests])
     return (
         <>
-            {checkIsAuthRoute() ? <nav className="bg-gray-800">
+            {checkIsAuthRoute() ? <nav className="relative sticky top-0 bg-gray-800 z-40">
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -62,7 +66,7 @@ const Header = ({checkIsAuthRoute}) => {
                                     {navBars.map((ele,index)=>(
                                         <span onClick={()=> {navigate(ele.path); setActive(ele.name)}} key={index}
                                               className={`px-3 cursor-pointer py-2 rounded-md text-sm font-medium ${active === ele.name?'bg-gray-900 text-white':'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
-                                              aria-current="page">{ele?.name}</span>
+                                              aria-current="page">{ele?.name}{' '}{(ele?.name ==='Requests' && requests && requests.data) ? `(${requests?.data?.length})`:''}</span>
                                     ))}
                                 </div>
                             </div>
@@ -124,5 +128,4 @@ const Header = ({checkIsAuthRoute}) => {
         </>
     )
 }
-export default Header;
 export default Header;

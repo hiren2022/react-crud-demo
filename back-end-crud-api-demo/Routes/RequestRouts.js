@@ -4,5 +4,5 @@ const auth = require("../Middleware/Auth");
 
 router.post("/send",auth, sendRequest);
 router.post("/update/:status/:id",auth, updateRequest);
-router.get("/:type",auth, getRequest);
+router.get("/getByType/:type",auth, getRequest);
 module.exports = router;

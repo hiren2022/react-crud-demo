@@ -17,13 +17,20 @@ export const getRequests = (payload) =>{
 export const setRequest = (payload) =>{
     return {
         type: types.SET_REQUEST_STATE,
-        payload:null
+        payload:null,
     }
 }
 
 export const updateRequest = (payload) =>{
     return {
         type: types.UPDATE_REQUEST_STATE,
+        payload
+    }
+}
+
+export const getFollowers = (payload) =>{
+    return {
+        type: types.GET_FOLLOWERS_STATE,
         payload
     }
 }

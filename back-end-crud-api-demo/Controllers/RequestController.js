@@ -20,15 +20,15 @@ module.exports.getRequest = async (req, res) => {
         let {type} = req?.params;
         if(type === 'user'){
             let requests = await Request.find({toUserId:{$in: req.user.user_id},status:{$nin:'accepted'}});
-            let final = requests.map((ele)=> {
-                let user = User.findOne({_id:ele?.toUserId})
+            let result = requests.map(async (ele)=> {
+                let user = await User.findOne({_id:ele?.toUserId})
                 return {
-                    content:user.name + 'has requested to follows you',
-                    ...ele,
+                    content:user.name + ' has requested to follow you',
+                    _id: ele?._id,
                 }
             });
-            console.log('user',final)
-            res.status(200).send({success: true, msg: "User Requests fetch successfully", data: requests});
+            let final = await Promise.all(result);
+            res.status(200).send({success: true, msg: "User Requests fetch successfully", data: final});
         }
         else {
             let requests = await Request.find();
@@ -46,7 +46,7 @@ module.exports.updateRequest = async (req, res) => {
             let request = await Request.findOne({_id:id});
             await User.findOneAndUpdate({_id:request?.fromUserId}, { $push: { "following": request?.toUserId } });
             await User.findOneAndUpdate({_id:request?.toUserId}, { $push: { "followers": request?.fromUserId } });
-            let requestUpdate = await Request.findOneAndUpdate({_id:id},{status:'accepted'},{new:true});
+            let requestUpdate = await Request.deleteOne({_id:id});
             res.status(200).send({success: true, msg: "Accepted", data: requestUpdate});
         }
         else if(status === 'rejected'){
@@ -54,7 +54,7 @@ module.exports.updateRequest = async (req, res) => {
             res.status(200).send({success: true, msg: "Accepted", data: requestDelete});
         }
         else {
-            res.status(400).send({success: true, msg: "Something went wrong!", data: null});
+            res.status(400).send({success: false, msg: "Something went wrong!", data: null});
         }
     } catch (ex) {
 

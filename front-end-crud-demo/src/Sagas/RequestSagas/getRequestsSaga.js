@@ -10,7 +10,7 @@ import {httpAuth, httpGet, httpPost} from "../../Helper/api";
 export function* getRequests({payload}) {
     try{
         yield put({ type: types.SET_LOADING,loading:true })
-        let result = yield call(httpGet,`/request/${payload?.type}`)
+        let result = yield call(httpGet,`/request/getByType/${payload?.type}`)
 
         yield put({
             type: types.GET_REQUEST_STATE_SUCCESS,

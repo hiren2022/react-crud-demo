@@ -7,6 +7,8 @@ import Registration from "./Components/Authencation/Registration";
 import Header from "./Components/Layouts/Header";
 import 'react-toastify/dist/ReactToastify.css';
 import Requests from "./Components/FollowFollowing/Requests";
+import Followers from "./Components/FollowFollowing/Followers";
+import Followings from "./Components/FollowFollowing/Followings";
 
 function App() {
   const [path,setPath] = useState('');
@@ -33,8 +35,8 @@ function App() {
             <Route path='/register' element={<Registration/>}  />
             <Route path='/add-user' element={<AddUser/>}  />
             <Route path='/requests' element={<Requests/>}  />
-            <Route path='/followers' element={<Requests/>}  />
-            <Route path='/followings' element={<Requests/>}  />
+            <Route path='/followers' element={<Followers/>}  />
+            <Route path='/followings' element={<Followings/>}  />
             <Route path='/edit-user/:id' element={<AddUser/>}  />
           </Routes>
         </BrowserRouter>

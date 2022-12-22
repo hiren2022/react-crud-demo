@@ -6,6 +6,7 @@ import {userLogOutSaga} from "./AuthSagas/logoutSaga";
 import {sendRequestSaga} from "./RequestSagas/sendRequestSaga";
 import {getRequestsSaga} from "./RequestSagas/getRequestsSaga";
 import {updateRequestSaga} from "./RequestSagas/updateRequestSaga";
+import {getFollowersSaga} from "./FollowerSagas/getFollowersSaga";
 
 export default function* root() {
     yield all([
@@ -15,6 +16,7 @@ export default function* root() {
         userLogOutSaga(),
         sendRequestSaga(),
         getRequestsSaga(),
-        updateRequestSaga()
+        updateRequestSaga(),
+        getFollowersSaga()
     ]);
 }

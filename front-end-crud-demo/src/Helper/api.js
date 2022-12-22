@@ -1,6 +1,6 @@
 import * as tokenUtil from '../Helper/TokenHandler';
-// let url = 'https://react-crud-demo-rfuvfdie3-hiren2022.vercel.app/api'
-let API_END_POINT = 'http://localhost:4040/api'
+let API_END_POINT = 'https://react-crud-demo-rfuvfdie3-hiren2022.vercel.app/api'
+// let API_END_POINT = 'http://localhost:4040/api'
 
 export const htpPost = async (request) => {
     return await fetch(`${API_END_POINT}${request.url}`,{
@@ -81,21 +81,6 @@ export const htpDelete = async (url,data) => {
             'Content-Type': 'application/json'
         },
     }).then(resp => resp.json())
-}
-const checkAndRegenerateToken = async (response, refresh_token) => {
-    if (refresh_token) {
-        // const REFRESh_TOKEN_URL = `${window?._env_?.REACT_APP_AUTH}/Refresh?refreshToken=${refresh_token}`;
-        // var refreshToken = await httpPostRefreshToken({ url: REFRESh_TOKEN_URL, body: {} });
-        // if (!refreshToken.error) {
-        //     tokenUtil.setAccessToken(JSON.stringify(refreshToken));
-        // }
-        // else {
-            window.location.href="/login";
-        // }
-    }
-    else{
-        window.location.href="/login";
-    }
 }
 const checkAndRegenerateToken = async (response, refresh_token) => {
     if (refresh_token) {

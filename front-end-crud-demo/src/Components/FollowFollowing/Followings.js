@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getRequests, updateRequest} from "../../Actions/requestActions";
+import {getFollowers, getRequests, updateRequest} from "../../Actions/requestActions";
 import {getTokenObject} from "../../Helper/TokenHandler";
 import Table from "../Table";
 
 
-const Requests = () => {
+const Followings = () => {
     const dispatch = useDispatch();
-    const requests = useSelector(state => state.requestData.userRequests);
+    const followings = useSelector(state => state.requestData.followings);
     const requestResult = useSelector(state => state.requestData.requestResult);
     const [rowData,setRowData] = useState([]);
-    const headers = ['id','content','accept','reject'];
+    // console.log('requests',followings)
+    const headers = ['id','name','userName','unFollow'];
     const getButton = (id,status,text,color) => {
         return <button
             className={`w-[50px] h-[30px] border-none bg-[${color}] rounded-[5px] text-[white] cursor-pointer`}
@@ -18,13 +19,15 @@ const Requests = () => {
         </button>
     }
     useEffect(()=>{
-        if(requests && requests.data && requests.data.length){
-            let data = requests.data.map((ele,index)=>{
+        dispatch(getFollowers({type:'user',state:'followings'}))
+    },[]);
+    useEffect(()=>{
+        if(followings && followings.data && followings.data.length){
+            let data = followings.data.map((ele,index)=>{
                 return {
                     ...ele,
                     id: index + 1,
-                    accept:getButton(ele?._id,'accepted','Accept','green'),
-                    reject:getButton(ele?._id,'rejected','Reject','red'),
+                    unFollow:getButton(ele?._id,'unFollow','UnFollow','red'),
                 }
             });
             setRowData([...data]);
@@ -32,9 +35,9 @@ const Requests = () => {
         else {
             setRowData([]);
         }
-    },[requests])
+    },[followings])
     const handleRequest = (id,status) => {
-        dispatch(updateRequest({id:id,status:status}))
+        // dispatch(updateRequest({id:id,status:status}))
     }
     return (
         <>
@@ -47,4 +50,4 @@ const Requests = () => {
     )
 };
 
-export default Requests;
+export default Followings;

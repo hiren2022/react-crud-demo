@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getRequests, updateRequest} from "../../Actions/requestActions";
+import {getFollowers, getRequests, updateRequest} from "../../Actions/requestActions";
 import {getTokenObject} from "../../Helper/TokenHandler";
 import Table from "../Table";
 
 
-const Requests = () => {
+const Followers = () => {
     const dispatch = useDispatch();
-    const requests = useSelector(state => state.requestData.userRequests);
+    const followers = useSelector(state => state.requestData.followers);
     const requestResult = useSelector(state => state.requestData.requestResult);
     const [rowData,setRowData] = useState([]);
-    const headers = ['id','content','accept','reject'];
+    // console.log('requests',followers)
+    const headers = ['id','name','userName','remove'];
     const getButton = (id,status,text,color) => {
         return <button
             className={`w-[50px] h-[30px] border-none bg-[${color}] rounded-[5px] text-[white] cursor-pointer`}
@@ -18,13 +19,15 @@ const Requests = () => {
         </button>
     }
     useEffect(()=>{
-        if(requests && requests.data && requests.data.length){
-            let data = requests.data.map((ele,index)=>{
+        dispatch(getFollowers({type:'user',state:'followers'}))
+    },[]);
+    useEffect(()=>{
+        if(followers && followers.data && followers.data.length){
+            let data = followers.data.map((ele,index)=>{
                 return {
                     ...ele,
                     id: index + 1,
-                    accept:getButton(ele?._id,'accepted','Accept','green'),
-                    reject:getButton(ele?._id,'rejected','Reject','red'),
+                    remove:getButton(ele?._id,'remove','Remove','red'),
                 }
             });
             setRowData([...data]);
@@ -32,9 +35,9 @@ const Requests = () => {
         else {
             setRowData([]);
         }
-    },[requests])
+    },[followers])
     const handleRequest = (id,status) => {
-        dispatch(updateRequest({id:id,status:status}))
+        // dispatch(updateRequest({id:id,status:status}))
     }
     return (
         <>
@@ -47,4 +50,4 @@ const Requests = () => {
     )
 };
 
-export default Requests;
+export default Followers;

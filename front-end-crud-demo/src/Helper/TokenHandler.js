@@ -1,7 +1,6 @@
 import jwt_decode from 'jwt-decode';
 export const getAccessToken = () => {
-    let accToken = localStorage.getItem("accessToken");
-    return accToken ? accToken : {};
+   return localStorage.getItem("accessToken");
 };
 
 export const setAccessToken = (data) => {
@@ -12,10 +11,9 @@ export const removeAccessToken = () => {
     localStorage.removeItem("accessToken");
 };
 export const getTokenObject = () => {
-    let decoded;
+    let decoded = '';
     let token = getAccessToken();
-    var tokenObj = JSON.stringify(token);
-    if (token && token !== '{}') {
+    if (token) {
         decoded = jwt_decode(token);
     }
     return decoded;

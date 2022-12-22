@@ -5,6 +5,8 @@ const initialState = {
     requestResult: null,
     requests: [],
     userRequests:[],
+    followers:[],
+    followings:[]
 }
 
 export default (state = initialState, action) => {
@@ -19,6 +21,9 @@ export default (state = initialState, action) => {
             return {...state, [action.state]: action.payload, loading: action.loading};
         case types.SET_REQUEST_STATE:
             return {...state, requestResult: action.payload};
+        case types.GET_FOLLOWERS_STATE_SUCCESS:
+        case types.GET_FOLLOWERS_STATE_FAILURE:
+            return {...state, [action.state]: action.payload, loading: action.loading};
         default:
             return state;
     }
