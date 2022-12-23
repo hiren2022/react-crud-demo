@@ -4,9 +4,6 @@
  */
 import { createStore, applyMiddleware } from 'redux'
 
-// composeWithDevTools is tools that gonna be connecting our application for debugging the redux into the browser
-import { composeWithDevTools } from 'redux-devtools-extension'
-
 // This is the middleware that we gonna use redux-saga
 import createSagaMiddleware from 'redux-saga'
 

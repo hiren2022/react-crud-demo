@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FaHeart, FaFilter, FaSearch} from "react-icons/fa";
-import {HiMail} from "react-icons/hi";
+import { FaSearch} from "react-icons/fa";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllUsers} from "../../Actions/userActions";
 import {ToastContainer} from "react-toastify";
@@ -216,7 +215,7 @@ const Users = () => {
                             </div>
                         </div>
                         <div className='row flex mt-[80px] px-5 justify-start'>
-                            <div
+                            <div onClick={()=> setActive('profile')}
                                 className={`mx-5 font-semibold pb-[11px] cursor-pointer px-2 hover:border-indigo-300 ${active === 'Profile' ? 'border-b-2 border-indigo-300' : ''}`}>Profile
                             </div>
                             {/*<div className={`mx-5 pb-[8px] hover:border-indigo-300 ${active === 'Profile'?'border-b-4 border-indigo-300':''}`}>Profile</div>*/}
