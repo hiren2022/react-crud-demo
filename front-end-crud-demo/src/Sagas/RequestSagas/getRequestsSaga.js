@@ -2,7 +2,7 @@ import {
     put,
     call,
     all,
-    takeLatest
+    takeEvery
 } from 'redux-saga/effects';
 import * as types from '../../Actions/Types'
 
@@ -30,5 +30,5 @@ export function* getRequests({payload}) {
 
 }
 export function* getRequestsSaga() {
-    yield all([takeLatest(types.GET_REQUEST_STATE, getRequests)]);
+    yield all([takeEvery(types.GET_REQUEST_STATE, getRequests)]);
 }

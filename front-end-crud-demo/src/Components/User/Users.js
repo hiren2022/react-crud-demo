@@ -9,6 +9,7 @@ import './User.css'
 
 const Users = () => {
     const users = useSelector(state => state.userData.users);
+    const loading = useSelector(state => state.userData.loading);
     const requests = useSelector(state => state.requestData.requests);
     const requestResult = useSelector(state => state.requestData.requestResult);
     const dispatch = useDispatch();
@@ -75,6 +76,7 @@ const Users = () => {
                 }
             }).filter(ele => ele);
             let filter = getFilteredData(item);
+            console.log('filter',filter)
             setUser(filter[0]?.data[0])
             setFilterData([...filter]);
             setData([...item]);
@@ -90,6 +92,7 @@ const Users = () => {
     useEffect(() => {
         if (requestResult && requestResult?.success) {
             dispatch(getRequests({type: 'allRequest'}));
+            dispatch(getRequests({type:'user'}))
             dispatch(setRequest())
         }
     }, [requestResult]);
@@ -192,7 +195,7 @@ const Users = () => {
                     </div>
                 </div>
                 <div className="w-full md:w-3/4 ">
-                    <div className="cover-photo w-full h-[200px] rounded-tr-lg"/>
+                    {(!loading && user) ? <><div className="cover-photo w-full h-[200px] rounded-tr-lg"/>
                     <div className="absolute top-[180px] justify-center text-center left-[500px] bg-white rounded-[100px] p-[3px]">
                         <img className="h-[200px] w-[200px] rounded-full"
                              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -253,7 +256,9 @@ const Users = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div></>:
+
+                        <></>}
 
                 </div>
             </div>

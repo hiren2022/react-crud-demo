@@ -20,8 +20,10 @@ const Header = ({checkIsAuthRoute}) => {
     const [active,setActive] = useState('Dashboard');
     const [open,setOpen] = useState(false);
     useEffect(()=>{
-        dispatch(getRequests({type:'user'}))
-    },[]);
+        if(checkIsAuthRoute()){
+            dispatch(getRequests({type:'user'}))
+        }
+    },[pathName]);
     useEffect(()=> {
         if(pathName !== '/'){
             let path = pathName.slice(1).charAt(0).toUpperCase() + pathName.slice(2);
@@ -66,7 +68,7 @@ const Header = ({checkIsAuthRoute}) => {
                                     {navBars.map((ele,index)=>(
                                         <span onClick={()=> {navigate(ele.path); setActive(ele.name)}} key={index}
                                               className={`px-3 cursor-pointer py-2 rounded-md text-sm font-medium ${active === ele.name?'bg-gray-900 text-white':'text-gray-300 hover:bg-gray-700 hover:text-white'}`}
-                                              aria-current="page">{ele?.name}{' '}{(ele?.name ==='Requests' && requests && requests.data) ? `(${requests?.data?.length})`:''}</span>
+                                              aria-current="page">{ele?.name}{' '}{(ele?.name ==='Requests' && requests && requests.data && requests.data.length) ? `(${requests?.data?.length})`:''}</span>
                                     ))}
                                 </div>
                             </div>
