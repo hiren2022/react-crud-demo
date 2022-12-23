@@ -5,11 +5,23 @@ const User = new mongoose.Schema({
         type: String,
         required: true,
     },
+    userName:{
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
         unique: true,
         max: 50,
+    },
+    password:{
+        type:String,
+        required: true,
+    },
+    birthDate:{
+        type: Date,
+        required: true,
     },
     gender:{
         type: String,
@@ -23,14 +35,26 @@ const User = new mongoose.Schema({
         type: Number,
         required: true
     },
-    color: {
-        type: String,
-        required: true
+    followers:{
+      type: Array,
+    },
+    following:{
+      type:Array
     },
     state: {
         type: String,
         required: true
     },
+    status: {
+        type: Boolean,
+    },
+},{
+    toJSON: {
+        transform(doc, ret) {
+            delete ret.password;
+            return ret;
+        },
+    }
 });
 
 module.exports = mongoose.model("users", User);

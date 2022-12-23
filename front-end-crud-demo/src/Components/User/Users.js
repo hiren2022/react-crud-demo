@@ -9,7 +9,7 @@ const Users = () => {
     let navigate = useNavigate()
     const [users,setUsers] = useState(null)
     const getAllUsers = async ()=>{
-        let resp = await htpGet('/user/all')
+        let resp = await htpGet('/admin/all')
         if(resp.data && resp.data.length){
             setUsers([...resp.data])
         }
@@ -22,7 +22,7 @@ const Users = () => {
     },[])
 
     const handleOnDelete = async (id) => {
-        let resp = await htpDelete(`/user/delete/${id}`)
+        let resp = await htpDelete(`/admin/delete/${id}`)
         if(resp && resp.success){
             getAllUsers()
         }

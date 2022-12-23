@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const UserRoutes = require("./Routes/UserRoutes");
+const RequestRoutes = require("./Routes/RequestRoutes");
+const FollowersRoute = require("./Routes/FollowerRoutes");
+const AdminRoutes = require("./Routes/AdminRoutes");
 // var multer = require('multer');
 // var upload = multer();
 const app = express();
@@ -30,4 +33,7 @@ app.listen(port, () => {
 })
 
 app.use("/api/user", UserRoutes);
+app.use("/api/request", RequestRoutes);
+app.use("/api/follower", FollowersRoute);
+app.use("/api/admin", AdminRoutes);
 

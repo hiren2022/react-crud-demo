@@ -16,7 +16,7 @@ const AddUser = () => {
     const params = useParams()
     const navigate = useNavigate()
     const getUserById = async (id) => {
-        let resp = await htpGet(`/user/get/${id}`)
+        let resp = await htpGet(`/admin/get/${id}`)
         if(resp && resp.success){
             setUser({...resp.data[0]})
         }
@@ -44,7 +44,7 @@ const AddUser = () => {
         }
     }
     const handleCreate = async (e) => {
-        let type = (params && params.id) ? '/user/update': '/user/create';
+        let type = (params && params.id) ? '/admin/update': '/admin/create';
         let resp = await htpPost(type,user)
         if(resp.status === 201){
            navigate('/')
