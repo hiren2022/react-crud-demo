@@ -11,13 +11,13 @@ import Followers from "./Components/FollowFollowing/Followers";
 import Followings from "./Components/FollowFollowing/Followings";
 
 function App() {
-  const [path,setPath] = useState(window.location.pathname);
+  const [pathName,setPathName] = useState(window.location.pathname);
   useEffect(()=>{
-    setPath(window.location.pathname);
+    setPathName(window.location.pathname);
   },[window.location.pathname]);
 
   const checkIsAuthRoute = ()=>{
-    switch (path) {
+    switch (pathName) {
       case '/login':
       case '/register':
         return false;
@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="App">
         <BrowserRouter>
-          <Header checkIsAuthRoute={checkIsAuthRoute} path={path}/>
+          <Header checkIsAuthRoute={checkIsAuthRoute}/>
           <Routes>
             <Route path='/' element={<Users/>}  />
             <Route path='/login' element={<Login/>}  />
