@@ -160,7 +160,7 @@ const Users = () => {
                                     {ele.letter}
                                 </div>
                                 {ele.data.map((item, id) => (
-                                    <div className="flex p-4 border justify-between cursor-pointer hover:bg-gray-200" key={id} onClick={(e)=> handleProfile(e,item)}>
+                                    <div className="flex p-4 border justify-between cursor-pointer hover:bg-gray-100" key={id} onClick={(e)=> handleProfile(e,item)}>
                                         <div className='flex justify-between'>
                                             <div className="mt-1">
                                                 <img className="h-10 w-10 rounded-full"

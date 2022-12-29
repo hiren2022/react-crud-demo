@@ -30,7 +30,6 @@ function App() {
         <BrowserRouter>
           <Header checkIsAuthRoute={checkIsAuthRoute}/>
           <Routes>
-            <Route path='/' element={<Users/>}  />
             <Route path='/login' element={<Login/>}  />
             <Route path='/register' element={<Registration/>}  />
             <Route path='/add-user' element={<AddUser/>}  />
@@ -38,6 +37,7 @@ function App() {
             <Route path='/followers' element={<Followers/>}  />
             <Route path='/followings' element={<Followings/>}  />
             <Route path='/edit-user/:id' element={<AddUser/>}  />
+            <Route path='/' element={<Users/>}  />
           </Routes>
         </BrowserRouter>
     </div>
