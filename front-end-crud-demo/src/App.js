@@ -28,16 +28,18 @@ function App() {
   return (
     <div className="App">
         <BrowserRouter>
-          <Header checkIsAuthRoute={checkIsAuthRoute}/>
+
           <Routes>
-            <Route path='/login' element={<Login/>}  />
-            <Route path='/register' element={<Registration/>}  />
-            <Route path='/add-user' element={<AddUser/>}  />
-            <Route path='/requests' element={<Requests/>}  />
-            <Route path='/followers' element={<Followers/>}  />
-            <Route path='/followings' element={<Followings/>}  />
-            <Route path='/edit-user/:id' element={<AddUser/>}  />
-            <Route path='/' element={<Users/>}  />
+            <Route path='/' element={<Header checkIsAuthRoute={checkIsAuthRoute}/>} >
+            <Route index element={<Users/>}  />
+            <Route path='login' element={<Login/>}  />
+            <Route path='register' element={<Registration/>}  />
+            <Route path='add-user' element={<AddUser/>}  />
+            <Route path='requests' element={<Requests/>}  />
+            <Route path='followers' element={<Followers/>}  />
+            <Route path='followings' element={<Followings/>}  />
+            <Route path='edit-user/:id' element={<AddUser/>}  />
+            </Route>
           </Routes>
         </BrowserRouter>
     </div>

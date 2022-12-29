@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../Actions/userActions";
 import {useNavigate} from "react-router-dom";
 import {getRequests} from "../../Actions/requestActions";
+import {Outlet} from "react-router";
 
 
 
@@ -127,6 +128,7 @@ const Header = ({checkIsAuthRoute}) => {
                     </div>
                 </div>
             </nav>: null}
+            <Outlet/>
         </>
     )
 }
