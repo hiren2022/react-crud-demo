@@ -5,6 +5,9 @@ const UserRoutes = require("./Routes/UserRoutes");
 const RequestRoutes = require("./Routes/RequestRouts");
 const FollowersRoute = require("./Routes/FollowersRoute");
 const PostRoutes = require("./Routes/PostRoutes");
+const RequestRoutes = require("./Routes/RequestRoutes");
+const FollowersRoute = require("./Routes/FollowerRoutes");
+const AdminRoutes = require("./Routes/AdminRoutes");
 // var multer = require('multer');
 // var upload = multer();
 const app = express();
@@ -36,4 +39,5 @@ app.use("/api/user", UserRoutes);
 app.use("/api/request", RequestRoutes);
 app.use("/api/follower", FollowersRoute);
 app.use("/api/post", PostRoutes);
+app.use("/api/admin", AdminRoutes);
 

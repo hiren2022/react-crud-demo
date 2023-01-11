@@ -40,6 +40,15 @@ const Users = () => {
         } else {
             setData([]);
             setFilterData([]);
+    let navigate = useNavigate()
+    const [users,setUsers] = useState(null)
+    const getAllUsers = async ()=>{
+        let resp = await htpGet('/admin/all')
+        if(resp.data && resp.data.length){
+            setUsers([...resp.data])
+        }
+        else {
+            setUsers(null)
         }
     }, [users]);
     useEffect(()=>{
@@ -53,7 +62,6 @@ const Users = () => {
             dispatch(setRequest())
         }
     }, [requestResult]);
-
     const getFilteredData = (data) => {
         let result = data;
         if(searchText){
@@ -77,6 +85,10 @@ const Users = () => {
             data = 'Followed';
         } else {
             data = 'Follow';
+    const handleOnDelete = async (id) => {
+        let resp = await htpDelete(`/admin/delete/${id}`)
+        if(resp && resp.success){
+            getAllUsers()
         }
         return data;
     }

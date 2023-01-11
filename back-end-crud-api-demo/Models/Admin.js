@@ -5,10 +5,6 @@ const Admin = new mongoose.Schema({
         type: String,
         required: true,
     },
-    user_name:{
-       type: String,
-       required: true
-    },
     email: {
         type: String,
         required: true,
@@ -23,6 +19,26 @@ const Admin = new mongoose.Schema({
         type: Date,
         required: true,
     }
+    gender:{
+        type: String,
+        required: true,
+    },
+    hobby: {
+        type: Array,
+        required: true,
+    },
+    contact:{
+        type: Number,
+        required: true
+    },
+    color: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
 });
 
 module.exports = mongoose.model("admins", Admin);
