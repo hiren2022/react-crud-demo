@@ -80,9 +80,9 @@ module.exports.Register = async (req, res) => {
 
 module.exports.getById = async (req, res) => {
     try {
-        const user = await User.find({ _id:  req.params.id  })
+        const user = await User.find({ _id:  req.params.id  });
         if(user && user.length){
-            res.status(200).send({success: true,msg:"User Found",data:user});
+            res.status(200).send({success: true,msg:"User Found",data:user[0]});
         }
         else {
             res.status(404).send({success: false,msg:"User Not Found",data:null});

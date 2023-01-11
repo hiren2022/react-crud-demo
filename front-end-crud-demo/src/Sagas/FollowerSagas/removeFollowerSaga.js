@@ -7,27 +7,26 @@ import {
 import * as types from '../../Actions/Types'
 
 import {httpPost} from "../../Helper/api";
-export function* sendRequest({payload}) {
+export function* removeFollower({payload}) {
     try{
         yield put({ type: types.SET_LOADING,loading:true })
-        let request = {url:'/request/send',body:payload}
-        let result = yield call(httpPost,request)
+        let result = yield call(httpPost,{url:`/follower/removeFollower`,body:payload});
 
         yield put({
-            type: types.SEND_REQUEST_STATE_SUCCESS,
+            type: types.REMOVE_FOLLOWER_STATE_SUCCESS,
             payload: result,
             loading:false
         });
     }
     catch (e) {
         yield put({
-            type: types.SEND_REQUEST_STATE_FAILURE,
+            type: types.REMOVE_FOLLOWER_STATE_FAILURE,
             payload: null,
             loading:false
         });
     }
 
 }
-export function* sendRequestSaga() {
-    yield all([takeLatest(types.SEND_REQUEST_STATE, sendRequest)]);
+export function* removeFollowerSaga() {
+    yield all([takeLatest(types.REMOVE_FOLLOWER_STATE, removeFollower)]);
 }

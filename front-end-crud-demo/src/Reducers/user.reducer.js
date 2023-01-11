@@ -14,6 +14,7 @@ const initialState = {
         "state": "Gujarat",
         status: false,
     },
+    profile: null,
     userResult: null,
     users: []
 }
@@ -32,6 +33,9 @@ export default (state = initialState, action) => {
         case types.GET_USER_STATE_SUCCESS:
         case types.GET_USER_STATE_FAILURE:
             return {...state, users: action.payload, loading: action.loading};
+        case types.GET_PROFILE_SUCCESS:
+        case types.GET_PROFILE_FAILURE:
+            return {...state, profile: action.payload, loading: action.loading};
         default:
             return state;
     }

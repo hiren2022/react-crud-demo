@@ -10,7 +10,7 @@ const Followers = () => {
     const followers = useSelector(state => state.requestData.followers);
     const requestResult = useSelector(state => state.requestData.requestResult);
     const [rowData,setRowData] = useState([]);
-    // console.log('requests',followers)
+    let userToken = getTokenObject();
     const headers = ['id','name','userName','remove'];
     const getButton = (id,status,text,color) => {
         return <button
@@ -19,8 +19,10 @@ const Followers = () => {
         </button>
     }
     useEffect(()=>{
-        dispatch(getFollowers({type:'user',state:'followers'}))
-    },[]);
+        if(userToken && userToken?.user_id) {
+            dispatch(getFollowers({type: 'user', state: 'followers',id: userToken?.user_id}))
+        }
+    },[userToken]);
     useEffect(()=>{
         if(followers && followers.data && followers.data.length){
             let data = followers.data.map((ele,index)=>{

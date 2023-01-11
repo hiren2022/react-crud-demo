@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const UserRoutes = require("./Routes/UserRoutes");
 const RequestRoutes = require("./Routes/RequestRouts");
 const FollowersRoute = require("./Routes/FollowersRoute");
+const PostRoutes = require("./Routes/PostRoutes");
 // var multer = require('multer');
 // var upload = multer();
 const app = express();
@@ -34,4 +35,5 @@ app.listen(port, () => {
 app.use("/api/user", UserRoutes);
 app.use("/api/request", RequestRoutes);
 app.use("/api/follower", FollowersRoute);
+app.use("/api/post", PostRoutes);
 

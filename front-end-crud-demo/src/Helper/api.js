@@ -1,6 +1,6 @@
 import * as tokenUtil from '../Helper/TokenHandler';
-let API_END_POINT = 'https://react-crud-demo.vercel.app/api'
-// let API_END_POINT = 'http://localhost:4040/api'
+// let API_END_POINT = 'https://react-crud-demo.vercel.app/api'
+let API_END_POINT = 'http://localhost:4040/api'
 
 export const htpPost = async (request) => {
     return await fetch(`${API_END_POINT}${request.url}`,{

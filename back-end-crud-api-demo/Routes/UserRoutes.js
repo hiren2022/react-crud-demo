@@ -4,7 +4,7 @@ const auth = require("../Middleware/Auth");
 
 router.post("/register", Register);
 router.post("/login", Login);
-router.get("/get/:id",auth, getById);
+router.get("/profile/:id",auth, getById);
 router.post("/logout",auth, LogOut);
 router.get("/userAll",auth, GetAll);
 router.post("/update", Update);

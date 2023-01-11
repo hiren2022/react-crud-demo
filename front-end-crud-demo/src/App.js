@@ -9,6 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Requests from "./Components/FollowFollowing/Requests";
 import Followers from "./Components/FollowFollowing/Followers";
 import Followings from "./Components/FollowFollowing/Followings";
+import Profile from "./Components/User/Profile";
+import PostPage from "./Components/Posts/Posts";
+import CreatePost from "./Components/Posts/CreatePost";
 
 function App() {
   const [pathName,setPathName] = useState(window.location.pathname);
@@ -31,10 +34,11 @@ function App() {
 
           <Routes>
             <Route path='/' element={<Header checkIsAuthRoute={checkIsAuthRoute}/>} >
-            <Route index element={<Users/>}  />
+            <Route index element={<PostPage/>}  />
             <Route path='login' element={<Login/>}  />
             <Route path='register' element={<Registration/>}  />
-            <Route path='add-user' element={<AddUser/>}  />
+            <Route path='post/create' element={<CreatePost/>}  />
+            <Route path='profile/:id' element={<Profile/>}  />
             <Route path='requests' element={<Requests/>}  />
             <Route path='followers' element={<Followers/>}  />
             <Route path='followings' element={<Followings/>}  />

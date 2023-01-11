@@ -14,7 +14,7 @@ export const getRequests = (payload) =>{
     }
 }
 
-export const setRequest = (payload) =>{
+export const setRequest = () =>{
     return {
         type: types.SET_REQUEST_STATE,
         payload:null,
@@ -24,6 +24,12 @@ export const setRequest = (payload) =>{
 export const updateRequest = (payload) =>{
     return {
         type: types.UPDATE_REQUEST_STATE,
+        payload
+    }
+}
+export const removeFollower = (payload) =>{
+    return {
+        type: types.REMOVE_FOLLOWER_STATE,
         payload
     }
 }

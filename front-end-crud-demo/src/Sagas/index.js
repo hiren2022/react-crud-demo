@@ -7,6 +7,11 @@ import {sendRequestSaga} from "./RequestSagas/sendRequestSaga";
 import {getRequestsSaga} from "./RequestSagas/getRequestsSaga";
 import {updateRequestSaga} from "./RequestSagas/updateRequestSaga";
 import {getFollowersSaga} from "./FollowerSagas/getFollowersSaga";
+import {getProfileSaga} from "./UserSagas/getProfileSaga";
+import {removeFollowerSaga} from "./FollowerSagas/removeFollowerSaga";
+import {createPostSaga} from "./PostSagas/createPostSaga";
+import {getAllPostSaga} from "./PostSagas/getAllPostSaga";
+import {createLikeSaga} from "./PostSagas/createLikeSaga";
 
 export default function* root() {
     yield all([
@@ -17,6 +22,11 @@ export default function* root() {
         sendRequestSaga(),
         getRequestsSaga(),
         updateRequestSaga(),
-        getFollowersSaga()
+        getFollowersSaga(),
+        getProfileSaga(),
+        removeFollowerSaga(),
+        createPostSaga(),
+        getAllPostSaga(),
+        createLikeSaga(),
     ]);
 }

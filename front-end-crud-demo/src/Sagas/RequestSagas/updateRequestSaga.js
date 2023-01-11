@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects';
 import * as types from '../../Actions/Types'
 
-import {httpAuth, httpPost} from "../../Helper/api";
+import {httpPost} from "../../Helper/api";
 export function* updateRequest({payload}) {
     try{
         yield put({ type: types.SET_LOADING,loading:true });
