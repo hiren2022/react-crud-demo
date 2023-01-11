@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter,Routes,Route} from "react-router-dom";
-import Users from "./Components/User/Users";
 import AddUser from "./Components/User/AddUser";
 import Login from "./Components/Authencation/LoginPage";
 import Registration from "./Components/Authencation/Registration";
