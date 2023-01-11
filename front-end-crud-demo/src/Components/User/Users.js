@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import { FaSearch} from "react-icons/fa";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllUsers} from "../../Actions/userActions";
 import {ToastContainer} from "react-toastify";
@@ -40,17 +39,9 @@ const Users = () => {
         } else {
             setData([]);
             setFilterData([]);
-    let navigate = useNavigate()
-    const [users,setUsers] = useState(null)
-    const getAllUsers = async ()=>{
-        let resp = await htpGet('/admin/all')
-        if(resp.data && resp.data.length){
-            setUsers([...resp.data])
         }
-        else {
-            setUsers(null)
-        }
-    }, [users]);
+    },[users]);
+
     useEffect(()=>{
         let filter = getFilteredData(data);
         setFilterData([...filter]);
@@ -75,22 +66,6 @@ const Users = () => {
             });
         }
         return result;
-    }
-    const getRequestStatus = ({_id, followers}) => {
-        let status = requests && requests.data && requests.data.find((ele) => ele?.toUserId === _id)?.status;
-        let data = 'Follow';
-        if (status === 'pending') {
-            data = 'Requested';
-        } else if (followers.includes(userToken?.user_id)) {
-            data = 'Followed';
-        } else {
-            data = 'Follow';
-    const handleOnDelete = async (id) => {
-        let resp = await htpDelete(`/admin/delete/${id}`)
-        if(resp && resp.success){
-            getAllUsers()
-        }
-        return data;
     }
     const handleSendRequest = (e, item) => {
         dispatch(sendRequest({toUserId: item?._id, fromUserId: userToken?.user_id}));
