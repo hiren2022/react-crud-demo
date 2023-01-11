@@ -8,7 +8,7 @@ import {getTokenObject} from "../../Helper/TokenHandler";
 
 
 
-const Header = ({checkIsAuthRoute}) => {
+const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const requests = useSelector(state => state.requestData.userRequests);
@@ -25,7 +25,7 @@ const Header = ({checkIsAuthRoute}) => {
     const [collapse,setCollapse] = useState(false);
     let userToken = getTokenObject();
     useEffect(()=>{
-        if(checkIsAuthRoute()){
+        if(userToken){
             dispatch(getRequests({type:'user'}))
         }
     },[pathName]);
@@ -44,7 +44,7 @@ const Header = ({checkIsAuthRoute}) => {
     };
     return (
         <>
-            {checkIsAuthRoute() ? <nav className="relative sticky top-0 bg-gray-800 z-40">
+            {true ? <nav className="relative sticky top-0 bg-gray-800 z-40">
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div className="relative flex h-16 items-center justify-between">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

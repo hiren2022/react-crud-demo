@@ -19,10 +19,8 @@ const Followers = () => {
         </button>
     }
     useEffect(()=>{
-        if(userToken && userToken?.user_id) {
             dispatch(getFollowers({type: 'user', state: 'followers',id: userToken?.user_id}))
-        }
-    },[userToken]);
+    },[]);
     useEffect(()=>{
         if(followers && followers.data && followers.data.length){
             let data = followers.data.map((ele,index)=>{

@@ -7,7 +7,7 @@ module.exports.getFollowers = async (req, res) => {
             let data = user.followers.length && user.followers.map(async (ele)=>{
                 return await User.findOne({_id:ele});
             });
-            let final = await Promise.all(data);
+            let final = data ? await Promise.all(data):[];
             res.status(200).send({success: true, msg: "Followers fetch successfully", data: final});
         }
         else {
@@ -25,7 +25,7 @@ module.exports.getFollowings = async (req, res) => {
             let data = user.following.length && user.following.map(async (ele)=>{
                 return await User.findOne({_id:ele});
             });
-            let final = await Promise.all(data);
+            let final = data ? await Promise.all(data):[];
             res.status(200).send({success: true, msg: "Followings fetch successfully", data: final});
         }
         else {

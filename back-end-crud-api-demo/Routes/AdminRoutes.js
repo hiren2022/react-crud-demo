@@ -1,7 +1,7 @@
-const { GetAll,getById,Create,Update,Delete  } = require("../Controllers/AdminController");
+const { GetAll,getById,Register,Update,Delete  } = require("../Controllers/AdminController");
 const router = require("express").Router();
 
-router.post("/create", Create);
+router.post("/create", Register);
 router.get("/get/:id", getById);
 router.get("/all", GetAll);
 router.post("/update", Update);

@@ -13,29 +13,16 @@ import PostPage from "./Components/Posts/Posts";
 import CreatePost from "./Components/Posts/CreatePost";
 
 function App() {
-  const [pathName,setPathName] = useState(window.location.pathname);
-  useEffect(()=>{
-    setPathName(window.location.pathname);
-  },[window.location.pathname]);
 
-  const checkIsAuthRoute = ()=>{
-    switch (pathName) {
-      case '/login':
-      case '/register':
-        return false;
-      default:
-        return true;
-    }
-  }
   return (
     <div className="App">
         <BrowserRouter>
 
           <Routes>
-            <Route path='/' element={<Header checkIsAuthRoute={checkIsAuthRoute}/>} >
-            <Route index element={<PostPage/>}  />
             <Route path='login' element={<Login/>}  />
             <Route path='register' element={<Registration/>}  />
+            <Route path='/' element={<Header/>} >
+            <Route index element={<PostPage/>}  />
             <Route path='post/create' element={<CreatePost/>}  />
             <Route path='profile/:id' element={<Profile/>}  />
             <Route path='requests' element={<Requests/>}  />

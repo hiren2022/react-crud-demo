@@ -22,7 +22,6 @@ module.exports.getRequest = async (req, res) => {
             let requests = await Request.find({toUserId:{$in: req.user.user_id},status:{$nin:'accepted'}});
             let result = requests.map(async (ele)=> {
                 let user = await User.findOne({_id:ele?.fromUserId})
-                let user = await User.findOne({_id:ele?.toUserId})
                 return {
                     content:user.name + ' has requested to follow you',
                     _id: ele?._id,
